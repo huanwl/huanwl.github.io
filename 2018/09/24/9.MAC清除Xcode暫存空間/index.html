@@ -19,15 +19,15 @@
   
   <title>MAC 清除 Xcode 的暫存空間 | Keep Calm and Carry on</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="回憶起當初為了省錢，買個一台128Ｇ的Mac，變成現在每天都在省硬碟空間，過的很辛苦… 因此我上網找了一些瘦身方法，試過之後覺得滿有用的就記錄下來。   Xcode有在開發iOS的人都會遇到的問題，就是Xcode太肥大了。Xcode除了本身容量的超大之外，還會暫存一些開發時需要的檔案，這些檔案都是Xcode自己產生，刪掉了也沒什麼差別，只要在執行一次程式就會在自動產生。 Xcode的暫存檔主要有三">
+  <meta name="description" content="回憶起當初為了省錢，買個一台128Ｇ的Mac，變成現在每天都在省硬碟空間，過的很辛苦… 因此我上網找了一些瘦身方法，試過之後覺得滿有用的就記錄下來。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MAC 清除 Xcode 的暫存空間">
 <meta property="og:url" content="https://huanwl.github.io/2018/09/24/9.MAC%E6%B8%85%E9%99%A4Xcode%E6%9A%AB%E5%AD%98%E7%A9%BA%E9%96%93/index.html">
 <meta property="og:site_name" content="Keep Calm and Carry on">
-<meta property="og:description" content="回憶起當初為了省錢，買個一台128Ｇ的Mac，變成現在每天都在省硬碟空間，過的很辛苦… 因此我上網找了一些瘦身方法，試過之後覺得滿有用的就記錄下來。   Xcode有在開發iOS的人都會遇到的問題，就是Xcode太肥大了。Xcode除了本身容量的超大之外，還會暫存一些開發時需要的檔案，這些檔案都是Xcode自己產生，刪掉了也沒什麼差別，只要在執行一次程式就會在自動產生。 Xcode的暫存檔主要有三">
+<meta property="og:description" content="回憶起當初為了省錢，買個一台128Ｇ的Mac，變成現在每天都在省硬碟空間，過的很辛苦… 因此我上網找了一些瘦身方法，試過之後覺得滿有用的就記錄下來。">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2018-09-24T03:30:00.000Z">
-<meta property="article:modified_time" content="2021-04-29T14:14:32.375Z">
+<meta property="article:modified_time" content="2021-05-23T01:54:19.481Z">
 <meta property="article:author" content="Wayne">
 <meta property="article:tag" content="Mac">
 <meta property="article:tag" content="Xcode">
@@ -110,7 +110,7 @@
       
         <p>回憶起當初為了省錢，買個一台128Ｇ的Mac，變成現在每天都在省硬碟空間，過的很辛苦…</p>
 <p>因此我上網找了一些瘦身方法，試過之後覺得滿有用的就記錄下來。</p>
-<!--- more --->
+<span id="more"></span>
 
 <h2 id="Xcode"><a href="#Xcode" class="headerlink" title="Xcode"></a>Xcode</h2><p>有在開發iOS的人都會遇到的問題，就是Xcode太肥大了。Xcode除了本身容量的超大之外，還會暫存一些開發時需要的檔案，<br>這些檔案都是Xcode自己產生，刪掉了也沒什麼差別，只要在執行一次程式就會在自動產生。</p>
 <p>Xcode的暫存檔主要有三個目錄：iOS DeviceSupport、Archives、DerivedData，刪除指令如下所示。</p>
