@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-138721664-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-138721664-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+  
+  <title>設計模式Design Pattern | Keep Calm and Carry on</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;emsp;&amp;emsp;設計模式最早是出自於四人幫(Gang of Four)撰寫的一本書:Design Patterns: Elements of Reusable Object-Oriented Software。書中提到的設計模式可以分成3大類型，一共23個模式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="設計模式Design Pattern">
+<meta property="og:url" content="https://huanwl.github.io/2018/06/07/3.%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Keep Calm and Carry on">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;設計模式最早是出自於四人幫(Gang of Four)撰寫的一本書:Design Patterns: Elements of Reusable Object-Oriented Software。書中提到的設計模式可以分成3大類型，一共23個模式。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2018-06-07T14:36:41.000Z">
+<meta property="article:modified_time" content="2021-04-29T14:14:32.371Z">
+<meta property="article:author" content="Wayne">
+<meta property="article:tag" content="軟體工程">
+<meta property="article:tag" content="設計模式">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/" title="Keep Calm and Carry on" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <link href="/css/vs.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Keep Calm and Carry on</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Wayne&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://huanwl.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-3.設計模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/07/3.%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time datetime="2018-06-07T14:36:41.000Z" itemprop="datePublished">2018-06-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      設計模式Design Pattern
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody" style="text-align: justify">
+      
+        <p>&emsp;&emsp;設計模式最早是出自於四人幫(Gang of Four)撰寫的一本書:<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%8F%AF%E5%A4%8D%E7%94%A8%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%9F%BA%E7%A1%80">Design Patterns: Elements of Reusable Object-Oriented Software</a>。書中提到的設計模式可以分成3大類型，一共23個模式。</p>
+<span id="more"></span> 
+
+<h3 id="創建類型-Creational-Patterns"><a href="#創建類型-Creational-Patterns" class="headerlink" title="創建類型 Creational Patterns"></a>創建類型 Creational Patterns</h3><ol>
+<li><strong>Abstract Factory</strong>: Provide an interface for creating families of related or dependent objects without specifying their concrete classes.</li>
+<li><strong>Builder</strong>: Separate the construction of a complex object from its representation so that the same construction process can create different representations.</li>
+<li><strong>Factory Method</strong>: Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.</li>
+<li><strong>Prototype</strong>: Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype.</li>
+<li><strong>Singleton</strong>: Ensure a class only has one instance, and provide a global point of access to it.</li>
+</ol>
+<h3 id="結構類型-Structural-Patterns"><a href="#結構類型-Structural-Patterns" class="headerlink" title="結構類型 Structural Patterns"></a>結構類型 Structural Patterns</h3><ol>
+<li><strong>Adapter</strong>: Convert the interface of a class into another interface clients expect. Adapter lets classes work together that couldn’t otherwise because of incompatible interfaces.</li>
+<li><strong>Bridge</strong>: Decouple an abstraction from its implementation so that the two can vary independently.</li>
+<li><strong>Composite</strong>: Compose objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions of objects uniformly.</li>
+<li><strong>Decorator</strong>: Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.</li>
+<li><strong>Facade</strong>: Provide a unified interface to a set of interfaces in a subsystem. Façade defines a higher-level interface that makes the subsystem easier to use.</li>
+<li><strong>Flyweight</strong>: Use sharing to support large numbers of fine-grained objects efficiently.</li>
+<li><strong>Proxy</strong>: Provide a surrogate or placeholder for another object to control access to it.</li>
+</ol>
+<h3 id="行為類型-Behavioral-Patterns"><a href="#行為類型-Behavioral-Patterns" class="headerlink" title="行為類型 Behavioral Patterns"></a>行為類型 Behavioral Patterns</h3><ol>
+<li><strong>Chain of Responsibility</strong>: Avoid coupling the sender of a request to its receiver by giving more than one objet a change to handle the request. Chain the receiving objects and pass the request along the chain until an object handles it.</li>
+<li><strong>Command</strong>: Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations.</li>
+<li><strong>Interpreter</strong>: Given a language, define a representation for its grammar along with an interpreter that uses the representation to interpret sentences in the language.</li>
+<li><strong>Iterator</strong>: Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation.</li>
+<li><strong>Mediator</strong>: Define an object that encapsulates how a set of objects interact. Mediator promotes loose coupling by keeping objects from referring to each other explicitly, and it lets you vary their interaction independently.</li>
+<li><strong>Memento</strong>: Without violating encapsulation, capture and externalize an object’s internal state so that the object can be restored to this state later.</li>
+<li><strong>Observer</strong>: Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.</li>
+<li><strong>State</strong>: Allow an object to alter its behavior when tis internal state changes. The object will appear to change its class.</li>
+<li><strong>Strategy</strong>: Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it.</li>
+<li><strong>Template Method</strong>: Define the skeleton of an algorithm in an operation, deferring some steps to subclasses. Template Method lets subclasses redefine certain steps of an algorithm without changing the algorithm’s structure.</li>
+<li><strong>Visitor</strong>: Represent an operation to be performed on the elements of an object structure. Visitor lets you define a new operation without changing the classes of the elements on which it operates.</li>
+</ol>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://teddy-chen-tw.blogspot.com/2012/10/creational-patterns.html">http://teddy-chen-tw.blogspot.com/2012/10/creational-patterns.html</a></li>
+<li><a target="_blank" rel="noopener" href="http://teddy-chen-tw.blogspot.com/2012/11/structural-patterns.html">http://teddy-chen-tw.blogspot.com/2012/11/structural-patterns.html</a></li>
+<li><a target="_blank" rel="noopener" href="http://teddy-chen-tw.blogspot.com/2013/03/behavioral-patterns.html">http://teddy-chen-tw.blogspot.com/2013/03/behavioral-patterns.html</a></li>
+</ul>
+<h3 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h3><p>Teddy老師的部落格寫得真的很棒，對於想學習軟體工程的新手或中手都有很大的幫助。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://huanwl.github.io/2018/06/07/3.%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" data-id="cko2z9ee20004kcvecx03hyjg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" rel="tag">設計模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B/" rel="tag">軟體工程</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/06/16/5.cookie%E7%AD%86%E8%A8%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Cookie學習筆記
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/06/2.%E8%BB%9F%E9%AB%94%E5%BA%A6%E9%87%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">軟體度量Software Metric</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET/" rel="tag">ASP.NET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Browser/" rel="tag">Browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/" rel="tag">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/" rel="tag">Xcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" rel="tag">設計模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B/" rel="tag">軟體工程</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ASP-NET/" style="font-size: 20px;">ASP.NET</a> <a href="/tags/Browser/" style="font-size: 20px;">Browser</a> <a href="/tags/C/" style="font-size: 10px;">C#</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/HTML/" style="font-size: 20px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 20px;">HTTP</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">設計模式</a> <a href="/tags/%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B/" style="font-size: 20px;">軟體工程</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/21/11.%E5%AD%B8%E7%BF%92Cache-Control/">學習Cache-Control</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/24/10.CSS%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/">CSS學習筆記</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/24/9.MAC%E6%B8%85%E9%99%A4Xcode%E6%9A%AB%E5%AD%98%E7%A9%BA%E9%96%93/">MAC 清除 Xcode 的暫存空間</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/24/8.ASP.NET%E8%87%AA%E5%8B%95%E5%82%99%E4%BB%BD%E8%B3%87%E6%96%99%E5%BA%AB/">[ASP.NET] 自動備份資料庫</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/04/7.MetaTag%E7%AD%86%E8%A8%98/">[HTML] 關於Mata tag</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Wayne<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

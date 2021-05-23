@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-138721664-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-138721664-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+  
+  <title>[ASP.NET] 自動備份資料庫 | Keep Calm and Carry on</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="由於常常遇到客戶家的 DB 是 SQL Express，每當建置完系統後都會有備份資料庫的需求，偏偏 SQL Express 不提供自動備份功能，因此只能自己實作排程備份。 基本上，Window Server上要做排程，最簡單就是用內建的工作排程器，必須要寫一個console程式，或是用bat檔執行SQL指令; 不過，我目前都是用Hanfire，可以產生背景處理程序完成排程工作，並且可以直接在原本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[ASP.NET] 自動備份資料庫">
+<meta property="og:url" content="https://huanwl.github.io/2018/09/24/8.ASP.NET%E8%87%AA%E5%8B%95%E5%82%99%E4%BB%BD%E8%B3%87%E6%96%99%E5%BA%AB/index.html">
+<meta property="og:site_name" content="Keep Calm and Carry on">
+<meta property="og:description" content="由於常常遇到客戶家的 DB 是 SQL Express，每當建置完系統後都會有備份資料庫的需求，偏偏 SQL Express 不提供自動備份功能，因此只能自己實作排程備份。 基本上，Window Server上要做排程，最簡單就是用內建的工作排程器，必須要寫一個console程式，或是用bat檔執行SQL指令; 不過，我目前都是用Hanfire，可以產生背景處理程序完成排程工作，並且可以直接在原本">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2018-09-24T03:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-29T14:14:32.374Z">
+<meta property="article:author" content="Wayne">
+<meta property="article:tag" content="ASP.NET">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/" title="Keep Calm and Carry on" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <link href="/css/vs.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Keep Calm and Carry on</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Wayne&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://huanwl.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-8.ASP.NET自動備份資料庫" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/24/8.ASP.NET%E8%87%AA%E5%8B%95%E5%82%99%E4%BB%BD%E8%B3%87%E6%96%99%E5%BA%AB/" class="article-date">
+  <time datetime="2018-09-24T03:00:00.000Z" itemprop="datePublished">2018-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [ASP.NET] 自動備份資料庫
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody" style="text-align: justify">
+      
+        <p>由於常常遇到客戶家的 DB 是 SQL Express，每當建置完系統後都會有備份資料庫的需求，<br>偏偏 SQL Express 不提供自動備份功能，因此只能自己實作排程備份。</p>
+<p>基本上，Window Server上要做排程，最簡單就是用內建的工作排程器，必須要寫一個console程式，<br>或是用bat檔執行SQL指令; 不過，我目前都是用<a target="_blank" rel="noopener" href="http://hangfire.io/">Hanfire</a>，可以產生背景處理程序完成排程工作，並且可以直接在原本的網站專案上寫排程的程式碼，實在是非常的好用。</p>
+<p>有了排程系統，接下來就只要準備備份的SQL指令，而除了資料庫備份外，建議在備份後清理一下log file，<br>因為log file越到後期會肥大，動則好幾10Ｇ… 不但佔滿硬碟空間，網站也會跑得比較慢。</p>
+<span id="more"></span> 
+
+<h2 id="備份資料庫的指令碼"><a href="#備份資料庫的指令碼" class="headerlink" title="備份資料庫的指令碼"></a>備份資料庫的指令碼</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 準備備份參數</span></span><br><span class="line"><span class="keyword">DECLARE</span> <span class="variable">@path</span> nvarchar(MAX), <span class="variable">@name</span> nvarchar(MAX)</span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@path</span> <span class="operator">=</span> N<span class="string">&#x27;C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERVER\MSSQL\Backup\MyDatabase.bak&#x27;</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@name</span> <span class="operator">=</span> N<span class="string">&#x27;MyDatabase-完整資料庫備份&#x27;</span></span><br><span class="line"><span class="comment">-- 執行備份命令</span></span><br><span class="line">BACKUP DATABASE [CPCBoard] <span class="keyword">TO</span> DISK <span class="operator">=</span> <span class="variable">@path</span> <span class="keyword">WITH</span> NOFORMAT, NOINIT, NAME <span class="operator">=</span> <span class="variable">@name</span>, <span class="keyword">SKIP</span>, NOREWIND, NOUNLOAD, STATS <span class="operator">=</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="清理記錄檔案的指令碼"><a href="#清理記錄檔案的指令碼" class="headerlink" title="清理記錄檔案的指令碼"></a>清理記錄檔案的指令碼</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">USE [MyDatabase];</span><br><span class="line"><span class="comment">-- 轉換資料庫到簡易模式</span></span><br><span class="line"><span class="keyword">ALTER</span> DATABASE [MyDatabase]</span><br><span class="line"><span class="keyword">SET</span> RECOVERY SIMPLE;</span><br><span class="line"><span class="comment">-- 壓縮 log file 到 1 MB.</span></span><br><span class="line">DBCC SHRINKFILE (N<span class="string">&#x27;MyDatabase_log&#x27;</span>, <span class="number">1</span>);</span><br><span class="line"><span class="comment">-- 回復資料庫到恢復模式</span></span><br><span class="line"><span class="keyword">ALTER</span> DATABASE [MyDatabase]</span><br><span class="line"><span class="keyword">SET</span> RECOVERY <span class="keyword">FULL</span>;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://huanwl.github.io/2018/09/24/8.ASP.NET%E8%87%AA%E5%8B%95%E5%82%99%E4%BB%BD%E8%B3%87%E6%96%99%E5%BA%AB/" data-id="cko2z9ee9000bkcve2nh675g2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ASP-NET/" rel="tag">ASP.NET</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/09/24/9.MAC%E6%B8%85%E9%99%A4Xcode%E6%9A%AB%E5%AD%98%E7%A9%BA%E9%96%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          MAC 清除 Xcode 的暫存空間
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/04/7.MetaTag%E7%AD%86%E8%A8%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[HTML] 關於Mata tag</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET/" rel="tag">ASP.NET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Browser/" rel="tag">Browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/" rel="tag">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/" rel="tag">Xcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" rel="tag">設計模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B/" rel="tag">軟體工程</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ASP-NET/" style="font-size: 20px;">ASP.NET</a> <a href="/tags/Browser/" style="font-size: 20px;">Browser</a> <a href="/tags/C/" style="font-size: 10px;">C#</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/HTML/" style="font-size: 20px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 20px;">HTTP</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">設計模式</a> <a href="/tags/%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B/" style="font-size: 20px;">軟體工程</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/21/11.%E5%AD%B8%E7%BF%92Cache-Control/">學習Cache-Control</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/24/10.CSS%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/">CSS學習筆記</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/24/9.MAC%E6%B8%85%E9%99%A4Xcode%E6%9A%AB%E5%AD%98%E7%A9%BA%E9%96%93/">MAC 清除 Xcode 的暫存空間</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/24/8.ASP.NET%E8%87%AA%E5%8B%95%E5%82%99%E4%BB%BD%E8%B3%87%E6%96%99%E5%BA%AB/">[ASP.NET] 自動備份資料庫</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/04/7.MetaTag%E7%AD%86%E8%A8%98/">[HTML] 關於Mata tag</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Wayne<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

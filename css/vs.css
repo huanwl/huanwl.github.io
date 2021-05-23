@@ -1,0 +1,95 @@
+/*
+
+Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>
+
+*/
+figure {
+  margin: 1em 0;
+}
+
+.highlight {
+  display: block;
+  overflow-x: auto;
+  padding: 0 0.5em;
+  background: #f7f8f9;
+  color: black;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.highlight .gutter {
+  width: 5%;
+  min-width: 10px;
+  text-align: center;
+  color: #bbb;
+}
+
+.highlight .code {
+  padding: 0 0.5em;
+}
+
+.highlight table {
+  margin: 0.5em 0;
+}
+
+.highlight table td {
+  border: 0;
+}
+
+.comment,
+.quote,
+.variable {
+  color: #008000;
+}
+
+.keyword,
+.selector-tag,
+.built_in,
+.name,
+.tag {
+  color: #00f;
+}
+
+.string,
+.title,
+.section,
+.attribute,
+.literal,
+.template-tag,
+.template-variable,
+.type,
+.addition {
+  color: #a31515;
+}
+
+.deletion,
+.selector-attr,
+.selector-pseudo,
+.meta {
+  color: #2b91af;
+}
+
+.doctag {
+  color: #808080;
+}
+
+.attr {
+  color: #f00;
+}
+
+.symbol,
+.bullet,
+.link {
+  color: #00b0e8;
+}
+
+
+.emphasis {
+  font-style: italic;
+}
+
+.strong {
+  font-weight: bold;
+}

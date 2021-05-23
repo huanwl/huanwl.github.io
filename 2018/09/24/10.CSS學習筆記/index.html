@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-138721664-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-138721664-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+  
+  <title>CSS學習筆記 | Keep Calm and Carry on</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CSS是用來控制網頁樣式的語言，即使網路上有許多前端CSS框架，最有名的就是Bootstrap，很輕易就能做出漂亮的網頁，但是如果不熟悉基本的CSS用法，就會不知道如何修改和調整樣式，只能夠複製貼上網路上已經寫好的範本。   width (寬度) 元素寬度是網頁設計中最優先考量的屬性 傳統網頁是用固定寬度，響應式網頁則是可變寬度 max-width 可以解決縮小螢幕時，畫面溢出的問題 min-wi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS學習筆記">
+<meta property="og:url" content="https://huanwl.github.io/2018/09/24/10.CSS%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/index.html">
+<meta property="og:site_name" content="Keep Calm and Carry on">
+<meta property="og:description" content="CSS是用來控制網頁樣式的語言，即使網路上有許多前端CSS框架，最有名的就是Bootstrap，很輕易就能做出漂亮的網頁，但是如果不熟悉基本的CSS用法，就會不知道如何修改和調整樣式，只能夠複製貼上網路上已經寫好的範本。   width (寬度) 元素寬度是網頁設計中最優先考量的屬性 傳統網頁是用固定寬度，響應式網頁則是可變寬度 max-width 可以解決縮小螢幕時，畫面溢出的問題 min-wi">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://huanwl.github.io/2018/09/24/10.CSS%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/box-model.png">
+<meta property="og:image" content="https://huanwl.github.io/2018/09/24/10.CSS%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/clearfix.png">
+<meta property="article:published_time" content="2018-09-24T03:50:00.000Z">
+<meta property="article:modified_time" content="2021-04-29T14:14:32.367Z">
+<meta property="article:author" content="Wayne">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://huanwl.github.io/2018/09/24/10.CSS%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/box-model.png">
+  
+    <link rel="alternate" href="/" title="Keep Calm and Carry on" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <link href="/css/vs.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Keep Calm and Carry on</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Wayne&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://huanwl.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-10.CSS學習筆記" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/24/10.CSS%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" class="article-date">
+  <time datetime="2018-09-24T03:50:00.000Z" itemprop="datePublished">2018-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSS學習筆記
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody" style="text-align: justify">
+      
+        <p>CSS是用來控制網頁樣式的語言，即使網路上有許多前端CSS框架，最有名的就是Bootstrap，很輕易就能做出漂亮的網頁，但是如果不熟悉基本的CSS用法，就會不知道如何修改和調整樣式，只能夠複製貼上網路上已經寫好的範本。</p>
+<!---more--->
+
+<h2 id="width-寬度"><a href="#width-寬度" class="headerlink" title="width (寬度)"></a>width (寬度)</h2><ul>
+<li>元素寬度是網頁設計中最優先考量的屬性</li>
+<li>傳統網頁是用固定寬度，響應式網頁則是可變寬度</li>
+<li>max-width 可以解決縮小螢幕時，畫面溢出的問題</li>
+<li>min-width 可以防止表格過窄</li>
+<li>百分比(%)是一個相對於目前容器元素的單位</li>
+</ul>
+<h2 id="單位"><a href="#單位" class="headerlink" title="單位"></a>單位</h2><ul>
+<li>px 是像素單位(pixel)</li>
+<li>% 是相對於目前容器(父元素)大小的單位<ul>
+<li>對於圖片可以縮放大小</li>
+</ul>
+</li>
+<li>em 是基於目前容器(父元素)的 font-size</li>
+<li>rem 是基於頂層容器(根元素)的 font-size</li>
+</ul>
+<h2 id="Box-Model（區塊模型）"><a href="#Box-Model（區塊模型）" class="headerlink" title="Box Model（區塊模型）"></a>Box Model（區塊模型）</h2><ul>
+<li>必須為區塊層級(block-level)的元素才擁有完整的區塊模型，<br>例如:  display: block  或是  display: inline-block</li>
+</ul>
+<img src="box-model.png" style="max-width: 400px"  >
+
+<ul>
+<li>Margin(外邊距)</li>
+<li>Border(邊框)</li>
+<li>Padding(內邊距)</li>
+<li>Content(內容)</li>
+</ul>
+<h4 id="margin-水平置中"><a href="#margin-水平置中" class="headerlink" title="margin 水平置中"></a>margin 水平置中</h4><ul>
+<li>設定 div 左右間距（margin-left 與 margin-right）為 auto ，使其水平居中</li>
+</ul>
+<h4 id="margin-垂直合併問題"><a href="#margin-垂直合併問題" class="headerlink" title="margin 垂直合併問題"></a>margin 垂直合併問題</h4><ul>
+<li>垂直方向的 margin 會互相合併，取兩者之間較大的 margin 值</li>
+<li>若父容器沒有 border 或 padding，則子元素的 margin 也會與父容器的 margin 合併</li>
+</ul>
+<h2 id="block-區塊元素"><a href="#block-區塊元素" class="headerlink" title="block (區塊元素)"></a>block (區塊元素)</h2><ul>
+<li>Block元素會獨佔一行，其寬度自動填滿父元素的寬度</li>
+<li>可以設置 width, height 屬性</li>
+<li>可以設置 margin, padding 屬性</li>
+<li>常見區塊元素 div, h1 - h6, p , form, ul, li , ol, dl, form, address, fieldset, hr, menu, table</li>
+</ul>
+<h2 id="inline-行內元素"><a href="#inline-行內元素" class="headerlink" title="inline (行內元素)"></a>inline (行內元素)</h2><ul>
+<li>inline元素不會獨佔一行，相鄰的行內元素會排列在同一行理，直到一行排不下才會換行，其寬度隨元素的內容而變化</li>
+<li>設置 width, height 無效</li>
+<li>水平方向的 padding-left, padding-right, margin-left, margin-right 都有效果</li>
+<li>垂直方向的 padding-top, padding-bottom 會產生邊距，但是沒有碰撞效果</li>
+<li>垂直方向的 margin-top, margin-bottom 無效</li>
+<li>常見行內元素 a, span, strong, em, br, img , input, label, select, button, textarea</li>
+</ul>
+<h2 id="inline-block"><a href="#inline-block" class="headerlink" title="inline-block"></a>inline-block</h2><ul>
+<li>inline-block元素不會獨佔一行</li>
+<li>可以設置 width, height 屬性</li>
+<li>可以設置 margin, padding 屬性</li>
+<li>效果類似 float 元素，可用於 div 區塊排版</li>
+<li>在 HTML 原始碼中，如果行內元素之間有空白或換行，網頁上的元素之間就會產生間隔 (大約4px)</li>
+</ul>
+<h2 id="box-sizing-屬性"><a href="#box-sizing-屬性" class="headerlink" title="box-sizing 屬性"></a>box-sizing 屬性</h2><ul>
+<li>box-sizing 用來設定區塊模型所要使用的模式。瀏覽器的預設模型皆為 content-box</li>
+<li>現在主流的前端設計是採用  border-box，可以使得內距和邊框不會增加元素本身的寬度</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 套用到所有元素的寫法</span><br><span class="line">* &#123;</span><br><span class="line">    -webkit-<span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">       -moz-<span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">            <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="document-flow"><a href="#document-flow" class="headerlink" title="document flow"></a>document flow</h2><ul>
+<li>document flow(文件流): 根據 HTML 文件的撰寫順序，元素由上至下，由左而右依序排列，並且依照 display 屬性作不同的排版。</li>
+<li>有兩種屬性會使元素脫離 document flow :<ul>
+<li>position (定位)</li>
+<li>float (浮動)</li>
+</ul>
+</li>
+</ul>
+<h2 id="float-浮動元素"><a href="#float-浮動元素" class="headerlink" title="float (浮動元素)"></a>float (浮動元素)</h2><ul>
+<li>使用 float 屬性定義元素為浮動，可以設定靠左或靠右</li>
+<li>效果類似 inline-block 元素，可用於 div 區塊排版</li>
+<li>優先權大於行內元素(inline or inline-block)</li>
+<li>當浮動元素後面有區塊元素時，浮動會覆蓋區塊</li>
+<li>文繞圖效果</li>
+</ul>
+<h2 id="clear-屬性"><a href="#clear-屬性" class="headerlink" title="clear 屬性"></a>clear 屬性</h2><ul>
+<li>清除區塊元素上的浮動元素</li>
+<li>用法：clear: left | right |both;</li>
+<li>使用 clearfix 解決 float 元素之父容器的塌陷問題</li>
+</ul>
+<img src="clearfix.png"  style="max-width: 350px" >
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span>:before, .clearfix:after &#123;</span><br><span class="line">  content: <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="attribute">display</span>: table;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.clearfix</span>:after &#123;</span><br><span class="line">  clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="position-定位元素"><a href="#position-定位元素" class="headerlink" title="position (定位元素)"></a>position (定位元素)</h2><h4 id="使用-position-屬性指定網頁元素的定位方式，有以下四種"><a href="#使用-position-屬性指定網頁元素的定位方式，有以下四種" class="headerlink" title="使用 position 屬性指定網頁元素的定位方式，有以下四種:"></a>使用 position 屬性指定網頁元素的定位方式，有以下四種:</h4><ol>
+<li>static (靜態) :</li>
+</ol>
+<ul>
+<li>元素的預設值，<strong>static 元素不會被定位</strong>，其位置由排列方式決定(document flow)，因此 top、left、right、bottom 會被忽略。</li>
+</ul>
+<ol start="2">
+<li>relative (相對) :</li>
+</ol>
+<ul>
+<li>相對於 <strong>元素本身的靜態位置</strong> 而定位，元素位置由 top、left、right、bottom 所決定。</li>
+</ul>
+<ol start="3">
+<li>fixed (固定) :</li>
+</ol>
+<ul>
+<li>相對於 <strong>瀏覽器畫面</strong> 而定位，元素位置由 top、left、right、bottom 所決定。</li>
+</ul>
+<ol start="4">
+<li>absolute (絕對) :</li>
+</ol>
+<ul>
+<li>相對於 <strong>元素目前所在的容器</strong> 而定位，元素位置由 top、left、right、bottom 所決定。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://huanwl.github.io/2018/09/24/10.CSS%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" data-id="cko2z9ee10003kcve089tai46" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/21/11.%E5%AD%B8%E7%BF%92Cache-Control/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          學習Cache-Control
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/09/24/9.MAC%E6%B8%85%E9%99%A4Xcode%E6%9A%AB%E5%AD%98%E7%A9%BA%E9%96%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MAC 清除 Xcode 的暫存空間</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET/" rel="tag">ASP.NET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Browser/" rel="tag">Browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/" rel="tag">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/" rel="tag">Xcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" rel="tag">設計模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B/" rel="tag">軟體工程</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ASP-NET/" style="font-size: 20px;">ASP.NET</a> <a href="/tags/Browser/" style="font-size: 20px;">Browser</a> <a href="/tags/C/" style="font-size: 10px;">C#</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/HTML/" style="font-size: 20px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 20px;">HTTP</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">設計模式</a> <a href="/tags/%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B/" style="font-size: 20px;">軟體工程</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/21/11.%E5%AD%B8%E7%BF%92Cache-Control/">學習Cache-Control</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/24/10.CSS%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/">CSS學習筆記</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/24/9.MAC%E6%B8%85%E9%99%A4Xcode%E6%9A%AB%E5%AD%98%E7%A9%BA%E9%96%93/">MAC 清除 Xcode 的暫存空間</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/24/8.ASP.NET%E8%87%AA%E5%8B%95%E5%82%99%E4%BB%BD%E8%B3%87%E6%96%99%E5%BA%AB/">[ASP.NET] 自動備份資料庫</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/04/7.MetaTag%E7%AD%86%E8%A8%98/">[HTML] 關於Mata tag</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Wayne<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

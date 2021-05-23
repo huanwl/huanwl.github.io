@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-138721664-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-138721664-1');
+</script>
+
+<!-- End Google Analytics -->
+
+
+  
+  <title>Cookie學習筆記 | Keep Calm and Carry on</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Cookie是一個最早被瀏覽器用來記錄使用者資訊的技術與規範，我們常用於紀錄一些不敏感的資訊，好讓我們可以減輕伺服器負擔，以及追蹤使用者狀態，提升使用者的操作體驗。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cookie學習筆記">
+<meta property="og:url" content="https://huanwl.github.io/2018/06/16/5.cookie%E7%AD%86%E8%A8%98/index.html">
+<meta property="og:site_name" content="Keep Calm and Carry on">
+<meta property="og:description" content="Cookie是一個最早被瀏覽器用來記錄使用者資訊的技術與規範，我們常用於紀錄一些不敏感的資訊，好讓我們可以減輕伺服器負擔，以及追蹤使用者狀態，提升使用者的操作體驗。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://huanwl.github.io/2018/06/16/5.cookie%E7%AD%86%E8%A8%98/cookie.png">
+<meta property="article:published_time" content="2018-06-16T03:30:00.000Z">
+<meta property="article:modified_time" content="2021-04-29T14:14:32.372Z">
+<meta property="article:author" content="Wayne">
+<meta property="article:tag" content="HTTP">
+<meta property="article:tag" content="Browser">
+<meta property="article:tag" content="ASP.NET">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://huanwl.github.io/2018/06/16/5.cookie%E7%AD%86%E8%A8%98/cookie.png">
+  
+    <link rel="alternate" href="/" title="Keep Calm and Carry on" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <link href="/css/vs.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Keep Calm and Carry on</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Wayne&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://huanwl.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-5.cookie筆記" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/16/5.cookie%E7%AD%86%E8%A8%98/" class="article-date">
+  <time datetime="2018-06-16T03:30:00.000Z" itemprop="datePublished">2018-06-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Cookie學習筆記
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody" style="text-align: justify">
+      
+        <p>Cookie是一個最早被瀏覽器用來記錄使用者資訊的技術與規範，我們常用於紀錄一些不敏感的資訊，<br>好讓我們可以減輕伺服器負擔，以及追蹤使用者狀態，提升使用者的操作體驗。</p>
+<span id="more"></span> 
+
+<h2 id="Cookie是如何運作"><a href="#Cookie是如何運作" class="headerlink" title="Cookie是如何運作?"></a>Cookie是如何運作?</h2><p>基本的運作原理其實是最容易被忽略的事情，因為現在的程式語言和開發框架都已經幫我們處理很多事，我們只要會使用framework提供的方法就夠了，但是如果遇到沒有實作cookie方法的框架該怎麼辦? 或是在寫單元測試及整合測試時遇到cookie該如何模擬? </p>
+<p>基本運作機制如下:</p>
+<p><img src="cookie.png"> </p>
+<center>( [圖片來源](https://docs.microsoft.com/zh-tw/aspnet/web-api/overview/advanced/http-cookies) )</center>
+
+<ol>
+<li>當使用者透過瀏覽器請求某一個網站時，伺服器可以回應帶有<strong>Set-Cookie</strong>屬性的HTTP Header。</li>
+<li>當瀏覽器接收到帶有<strong>Set-Cookie</strong>的Header時，會自動將cookie的name和value存放到瀏覽器內部的暫存區。</li>
+<li>當瀏覽器再次對伺服器發出請求時，就會尋找暫存區內有沒有<strong>該網域</strong>並且<strong>在時效內</strong>的cookie，如果有的話就會加入到這次請求的Header中，放在名為<strong>Cookie</strong>的屬性裡。</li>
+</ol>
+<p>以上運作機制我是參考<a target="_blank" rel="noopener" href="https://blog.miniasp.com/post/2008/02/22/Explain-HTTP-Cookie-in-Detail.aspx">保哥部落格</a>以及<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/HTTP_cookie">維基百科</a>，維基百科一定要找英文的，中文的cookie頁面寫得很少，但是英文的cookie頁面就寫得非常豐富，很值得一看。</p>
+<h2 id="Web-Api有沒有Cookie"><a href="#Web-Api有沒有Cookie" class="headerlink" title="Web Api有沒有Cookie?"></a>Web Api有沒有Cookie?</h2><p>現在讓我們回到正題，到底Api有沒有Cookie? 其實大家只要google關鍵字”ASP.NET Web Api Cookie”就能找到這篇官方文章<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-tw/aspnet/web-api/overview/advanced/http-cookies">ASP.NET Web API 中的HTTP Cookie</a>，上面包含原理及實作方式都已經寫得非常清楚。事實上，Cookie並不是專屬瀏覽器的功能，Cookie是一種通用的HTTP狀態管理的規範，最早被定義在<a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc2109">RFC 2109</a>，現行的瀏覽器都是依照這個規範為基礎，實作Cookie的機制。</p>
+<p>因此，我們的問題應該是，Web Api有沒有實作操作Cookie的類別及方法? 答案是: 有的。至於為什麼很多人會覺得Api就應該沒有Cookie，是因為接收Api的應用程式框架(可能是桌面軟體或手機軟體)，沒有實作操作Cookie的類別及方法。如果Api只是要向App互傳參數，根本不須要依照Cookie規範，傳參數的方法很多，藏在Header也可以，少數情況下才會用到Cookie。</p>
+<p>來看一下Web Api的cookie操作方式，範例為用cookie紀錄使用者的拜訪次數:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> HttpResponseMessage <span class="title">Get</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">int</span> count = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 取得cookie</span></span><br><span class="line">    <span class="keyword">var</span> cookie = Request.Headers.GetCookies(<span class="string">&quot;count&quot;</span>).FirstOrDefault();</span><br><span class="line">    <span class="keyword">if</span> (cookie != <span class="literal">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    	count += <span class="built_in">int</span>.Parse(cookie[<span class="string">&quot;count&quot;</span>].Value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 設定cookie</span></span><br><span class="line">    <span class="keyword">var</span> response = <span class="keyword">new</span> HttpResponseMessage();</span><br><span class="line">    <span class="keyword">var</span> newCookie = <span class="keyword">new</span> CookieHeaderValue(<span class="string">&quot;count&quot;</span>, count.ToString());</span><br><span class="line">    response.Headers.AddCookies(<span class="keyword">new</span> CookieHeaderValue[] &#123; newCookie &#125;);</span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再來看一下MVC的cookie操作方式，有點不一樣:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ActionResult <span class="title">Index</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">int</span> count = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 取得cookie</span></span><br><span class="line">    <span class="keyword">var</span> cookie = Request.Cookies[<span class="string">&quot;count&quot;</span>];</span><br><span class="line">    <span class="keyword">if</span> (cookie != <span class="literal">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        count += <span class="built_in">int</span>.Parse(cookie.Value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 設定cookie</span></span><br><span class="line">    <span class="keyword">var</span> newCookie = <span class="keyword">new</span> HttpCookie(<span class="string">&quot;count&quot;</span>, count.ToString());</span><br><span class="line">    Response.AppendCookie(newCookie);</span><br><span class="line">    <span class="keyword">return</span> View();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>Cookie只是一種基於HTTP的儲存與傳輸規範，在不同的架構中會有不同的做法。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://huanwl.github.io/2018/06/16/5.cookie%E7%AD%86%E8%A8%98/" data-id="cko2z9ee60008kcve7l6b1t71" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ASP-NET/" rel="tag">ASP.NET</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Browser/" rel="tag">Browser</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/03/6.%E5%8F%8D%E8%A6%86%E5%99%A8%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [C#] 關於反覆器模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/07/3.%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">設計模式Design Pattern</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET/" rel="tag">ASP.NET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Browser/" rel="tag">Browser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-pattern/" rel="tag">Design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/" rel="tag">Xcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" rel="tag">設計模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B/" rel="tag">軟體工程</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ASP-NET/" style="font-size: 20px;">ASP.NET</a> <a href="/tags/Browser/" style="font-size: 20px;">Browser</a> <a href="/tags/C/" style="font-size: 10px;">C#</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Design-pattern/" style="font-size: 10px;">Design pattern</a> <a href="/tags/HTML/" style="font-size: 20px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 20px;">HTTP</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">設計模式</a> <a href="/tags/%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B/" style="font-size: 20px;">軟體工程</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/21/11.%E5%AD%B8%E7%BF%92Cache-Control/">學習Cache-Control</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/24/10.CSS%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/">CSS學習筆記</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/24/9.MAC%E6%B8%85%E9%99%A4Xcode%E6%9A%AB%E5%AD%98%E7%A9%BA%E9%96%93/">MAC 清除 Xcode 的暫存空間</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/24/8.ASP.NET%E8%87%AA%E5%8B%95%E5%82%99%E4%BB%BD%E8%B3%87%E6%96%99%E5%BA%AB/">[ASP.NET] 自動備份資料庫</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/04/7.MetaTag%E7%AD%86%E8%A8%98/">[HTML] 關於Mata tag</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Wayne<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
