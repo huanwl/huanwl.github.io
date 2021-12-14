@@ -17,14 +17,21 @@
 
 
   
-  <title>彙整: 2018/9 | Wayne&#39;s Blog</title>
+  <title>.Net Core部屬到Heroku | Wayne&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="KEEP CALM AND CARRY ON">
-<meta property="og:url" content="https://huanwl.github.io/archives/2018/09/index.html">
+  <meta name="description" content="如何將.net core 3.1網站應用程式透過container的方式部屬到heroku平台?">
+<meta property="og:type" content="article">
+<meta property="og:title" content=".Net Core部屬到Heroku">
+<meta property="og:url" content="https://huanwl.github.io/2021/12/12/12.dotnetcore%E9%83%A8%E5%B1%AC%E5%88%B0heroku/index.html">
 <meta property="og:site_name" content="KEEP CALM AND CARRY ON">
+<meta property="og:description" content="如何將.net core 3.1網站應用程式透過container的方式部屬到heroku平台?">
 <meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-12-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-14T13:39:19.315Z">
 <meta property="article:author" content="Wayne">
+<meta property="article:tag" content="Heroku">
+<meta property="article:tag" content=".Net Core">
+<meta property="article:tag" content="Container">
 <meta name="twitter:card" content="summary">
   
   
@@ -76,78 +83,66 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/09/24/10.CSS%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" class="archive-article-date">
-  <time datetime="2018-09-24T03:50:00.000Z" itemprop="datePublished">9月 24</time>
+        <section id="main"><article id="post-12.dotnetcore部屬到heroku" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/12/12.dotnetcore%E9%83%A8%E5%B1%AC%E5%88%B0heroku/" class="article-date">
+  <time datetime="2021-12-11T16:00:00.000Z" itemprop="datePublished">2021-12-12</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/24/10.CSS%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/">CSS學習筆記</a>
+    <h1 class="article-title" itemprop="name">
+      .Net Core部屬到Heroku
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/09/24/9.MAC%E6%B8%85%E9%99%A4Xcode%E6%9A%AB%E5%AD%98%E7%A9%BA%E9%96%93/" class="archive-article-date">
-  <time datetime="2018-09-24T03:30:00.000Z" itemprop="datePublished">9月 24</time>
-</a>
+    <div class="article-entry" itemprop="articleBody" style="text-align: justify">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/24/9.MAC%E6%B8%85%E9%99%A4Xcode%E6%9A%AB%E5%AD%98%E7%A9%BA%E9%96%93/">MAC 清除 Xcode 的暫存空間</a>
-    </h1>
-  
+        <p>如何將.net core 3.1網站應用程式透過container的方式部屬到heroku平台?</p>
+<span id="more"></span> 
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/09/24/8.ASP.NET%E8%87%AA%E5%8B%95%E5%82%99%E4%BB%BD%E8%B3%87%E6%96%99%E5%BA%AB/" class="archive-article-date">
-  <time datetime="2018-09-24T03:00:00.000Z" itemprop="datePublished">9月 24</time>
-</a>
+<h2 id="編輯Dockfile"><a href="#編輯Dockfile" class="headerlink" title="編輯Dockfile"></a>編輯Dockfile</h2><p>.net core網站在docker容器內預設用80 port，但是Heroku平台容器會隨機指定一個port，並放入容器內環境變數 <strong>$PORT</strong> ，因此要修改網站的port為Heroku指定的port。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base</span><br><span class="line">WORKDIR /app</span><br><span class="line"></span><br><span class="line">FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build</span><br><span class="line">WORKDIR /src</span><br><span class="line">COPY [&quot;myapp/myapp.csproj&quot;, &quot;myapp/&quot;]</span><br><span class="line">RUN dotnet restore &quot;myapp/myapp.csproj&quot;</span><br><span class="line">COPY . .</span><br><span class="line">WORKDIR &quot;/src/myapp&quot;</span><br><span class="line">RUN dotnet build &quot;myapp.csproj&quot; -c Release -o /app/build</span><br><span class="line"></span><br><span class="line">FROM build AS publish</span><br><span class="line">RUN dotnet publish &quot;myapp.csproj&quot; -c Release -o /app/publish</span><br><span class="line"></span><br><span class="line">FROM base AS final</span><br><span class="line">WORKDIR /app</span><br><span class="line">COPY --from=publish /app/publish .</span><br><span class="line">CMD dotnet myapp.dll --urls http://+:$PORT</span><br></pre></td></tr></table></figure>
+
+<h2 id="部屬到Heroku"><a href="#部屬到Heroku" class="headerlink" title="部屬到Heroku"></a>部屬到Heroku</h2><p>先在本地端建立image，name必須符合Heroku的規定，再使用Heroku CLI推上平台就部屬完成了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -f .\myapp\Dockerfile -t registry.heroku.com/myapp/web .</span><br><span class="line">$ heroku container:login</span><br><span class="line">$ docker push registry.heroku.com/myapp/web:1.0</span><br><span class="line">$ heroku container:release web -a myapp</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://devcenter.heroku.com/articles/container-registry-and-runtime">https://devcenter.heroku.com/articles/container-registry-and-runtime</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.darkthread.net/blog/set-kestrel-port">https://blog.darkthread.net/blog/set-kestrel-port</a></li>
+</ul>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/24/8.ASP.NET%E8%87%AA%E5%8B%95%E5%82%99%E4%BB%BD%E8%B3%87%E6%96%99%E5%BA%AB/">[ASP.NET] 自動備份資料庫</a>
-    </h1>
-  
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://huanwl.github.io/2021/12/12/12.dotnetcore%E9%83%A8%E5%B1%AC%E5%88%B0heroku/" data-id="ckx3ckdz70006jcve5p7uh4yk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Net-Core/" rel="tag">.Net Core</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Container/" rel="tag">Container</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Heroku/" rel="tag">Heroku</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/04/21/11.%E5%AD%B8%E7%BF%92Cache-Control/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Http Cache</div>
+    </a>
   
+</nav>
 
+  
+</article>
 
 </section>
         
